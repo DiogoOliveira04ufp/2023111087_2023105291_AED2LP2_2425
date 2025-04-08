@@ -5,14 +5,6 @@ public class Sala
     private Piso piso;
     private Horario horario;
 
-    /*
-    public Classroom()
-    {
-        this.nome = "208";
-
-    }
-    */
-
     public Sala(int capacidade, String nome, Piso piso, Horario horario)
     {
         this.capacidade = capacidade;
