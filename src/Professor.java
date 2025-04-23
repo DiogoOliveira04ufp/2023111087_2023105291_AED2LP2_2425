@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.ST;
+
 import java.util.ArrayList;
 
 public class Professor extends Pessoa
