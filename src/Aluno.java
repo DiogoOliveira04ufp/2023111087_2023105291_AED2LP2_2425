@@ -6,9 +6,9 @@ public class Aluno extends Pessoa
     private int ano;
     private Curso curso;
 
-    public Aluno(String nome, String email, int numero, int ano, Curso curso, List<Cadeira> cadeiras, Horario horario)
+    public Aluno(Universidade universidade, String nome, String email, int numero, int ano, Curso curso, List<Cadeira> cadeiras, Horario horario)
     {
-        super(nome, email, horario, cadeiras);
+        super(universidade, nome, email, horario, cadeiras);
         this.numero = numero;
         this.ano = ano;
         this.curso = curso;

@@ -1,12 +1,12 @@
 public class Aula
 {
-    private String start_time;
-    private String end_time;
+    private Hora start_time;
+    private Hora end_time;
     private String dia;
     private Sala sala;
     private Cadeira cadeira;
 
-    public Aula(String start_time, String end_time, String dia, Sala sala, Cadeira cadeira)
+    public Aula(Hora start_time, Hora end_time, String dia, Sala sala, Cadeira cadeira)
     {
         this.start_time = start_time;
         this.end_time = end_time;
@@ -15,22 +15,22 @@ public class Aula
         this.cadeira = cadeira;
     }
 
-    public String getStartTime()
+    public Hora getStartTime()
     {
         return start_time;
     }
 
-    public void setStartTime(String start_time)
+    public void setStartTime(Hora start_time)
     {
         this.start_time = start_time;
     }
 
-    public String getEndTime()
+    public Hora getEndTime()
     {
         return end_time;
     }
 
-    public void setEndTime(String end_time)
+    public void setEndTime(Hora end_time)
     {
         this.end_time = end_time;
     }
