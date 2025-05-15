@@ -4,15 +4,13 @@ public class Cadeira
 {
     private String nome;
     private int year;
-    private Curso curso;
     private ArrayList<Professor> professores;
     private ArrayList<Aluno> students;
 
-    public Cadeira(String nome, int ano, Curso curso, ArrayList<Professor> professores, ArrayList<Aluno> alunos)
+    public Cadeira(String nome, int ano, ArrayList<Professor> professores, ArrayList<Aluno> alunos)
     {
         this.nome = nome;
         this.year = ano;
-        this.curso = curso;
         this.professores = professores;
         this.students = alunos;
     }
@@ -25,11 +23,6 @@ public class Cadeira
     public void setClassYear(int year)
     {
         this.year = year;
-    }
-
-    public void setClassCourse(Curso course)
-    {
-        this.curso = course;
     }
 
     public void setClassProfessors(ArrayList<Professor> professors)
@@ -50,11 +43,6 @@ public class Cadeira
     public int getClassYear()
     {
         return this.year;
-    }
-
-    public Curso getClassCourse()
-    {
-        return this.curso;
     }
 
     public ArrayList<Professor> getClassProfessors()

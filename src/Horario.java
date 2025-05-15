@@ -4,14 +4,12 @@ public class Horario
 {
     private int ano;
     private int semestre;
-    private Curso curso;
     private ArrayList<Aula> aulas;
 
-    public Horario(int ano, int semestre, Curso curso, ArrayList<Aula> aulas)
+    public Horario(int ano, int semestre, ArrayList<Aula> aulas)
     {
         this.ano = ano;
         this.semestre = semestre;
-        this.curso = curso;
         this.aulas = aulas;
     }
 
@@ -33,16 +31,6 @@ public class Horario
     public void setTTSemestre(int semestre)
     {
         this.semestre = semestre;
-    }
-
-    public Curso getTTCourse()
-    {
-        return curso;
-    }
-
-    public void setTTCourse(Curso course)
-    {
-        this.curso = course;
     }
 
     public ArrayList<Aula> getTTLectures()

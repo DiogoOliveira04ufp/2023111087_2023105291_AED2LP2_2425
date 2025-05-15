@@ -4,14 +4,12 @@ public class Aluno extends Pessoa
 {
     private final int numero;
     private int ano;
-    private Curso curso;
 
-    public Aluno(Universidade universidade, String nome, String email, int numero, int ano, Curso curso, List<Cadeira> cadeiras, Horario horario)
+    public Aluno(String nome, String email, int numero, int ano, Horario horario)
     {
-        super(universidade, nome, email, horario, cadeiras);
+        super(nome, email, horario);
         this.numero = numero;
         this.ano = ano;
-        this.curso = curso;
     }
 
     public void setStudentYear(int year)
@@ -19,20 +17,13 @@ public class Aluno extends Pessoa
         this.ano = year;
     }
 
-    public void setStudentCourse(Curso course)
-    {
-        this.curso = course;
-    }
-
     public int getStudentNumber()
     {
         return this.numero;
     }
 
-    public Curso getStudentCourse()
+    public String toString()
     {
-        return this.curso;
+        return "Aluno " + this.getName() + "\nEmail: " + this.getEmail() + "\nNumero: " + this.numero + "\nAno: " + this.ano;
     }
-
-
 }

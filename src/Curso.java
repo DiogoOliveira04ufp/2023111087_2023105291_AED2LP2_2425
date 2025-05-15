@@ -5,17 +5,13 @@ public class Curso
     private String nome;
     private int anos;
     private ArrayList<Cadeira> cadeiras;
-    private ArrayList<Aluno> alunos;
-    private ArrayList<Professor> professores;
     private Professor coordenador;
 
-    public Curso(String nome, int anos, ArrayList<Cadeira> cadeiras, ArrayList<Aluno> alunos, ArrayList<Professor> professores, Professor coordenador)
+    public Curso(String nome, int anos, ArrayList<Cadeira> cadeiras, Professor coordenador)
     {
         this.nome = nome;
         this.anos = anos;
         this.cadeiras = cadeiras;
-        this.alunos = alunos;
-        this.professores = professores;
         this.coordenador = coordenador;
     }
 
@@ -56,26 +52,6 @@ public class Curso
     public void setCourseClasses(ArrayList<Cadeira> classes)
     {
         this.cadeiras = classes;
-    }
-
-    public ArrayList<Aluno> getCourseStudents()
-    {
-        return alunos;
-    }
-
-    public void setCourseStudents(ArrayList<Aluno> students)
-    {
-        this.alunos = students;
-    }
-
-    public ArrayList<Professor> getCourseProfessors()
-    {
-        return professores;
-    }
-
-    public void setCourseProfessors(ArrayList<Professor> professors)
-    {
-        this.professores = professors;
     }
 
     public Professor getCourseCoordinator()
