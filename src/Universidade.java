@@ -6,7 +6,7 @@ public class Universidade
     private ArrayList<Curso> cursos;
     private ArrayList<Piso> pisos;
 
-    public Universidade(String nome, ArrayList<Curso> cursos, ArrayList<Aluno> alunos, ArrayList<Professor> professores, ArrayList<Piso> pisos)
+    public Universidade(String nome, ArrayList<Curso> cursos, ArrayList<Piso> pisos)
     {
         this.nome = nome;
         this.cursos = cursos;
@@ -41,5 +41,11 @@ public class Universidade
     public void setUniFloors(ArrayList<Piso> floors)
     {
         this.pisos = floors;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Universidade: " + nome + "\n" + "Cursos: " + (cursos.isEmpty() ? "Nenhum curso disponível" : cursos) + "\n" + "Pisos: " + (pisos.isEmpty() ? "Nenhum piso disponível" : pisos);
     }
 }
