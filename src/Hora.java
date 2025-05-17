@@ -89,4 +89,12 @@ public class Hora implements Comparable<Hora>
         else
             return false;
     }
+
+    public boolean conflitoCom(Hora hora)
+    {
+        if(this.hora <= hora.hora)
+        {
+            if(this.minuto)
+        }
+    }
 }
