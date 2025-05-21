@@ -7,15 +7,13 @@ public class Sala
     private int capacidade;
     private int tomadas;
     private String nome;
-    private Piso piso;
     private Horario horario;
 
-    public Sala(int capacidade, int tomadas, String nome, Piso piso, Horario horario)
+    public Sala(int capacidade, int tomadas, String nome, Horario horario)
     {
         this.capacidade = capacidade;
         this.tomadas = tomadas;
         this.nome = nome;
-        this.piso = piso;
         this.horario = horario;
     }
 
@@ -32,11 +30,6 @@ public class Sala
     public String getRoomName()
     {
         return this.nome;
-    }
-
-    public Piso getFloor()
-    {
-        return this.piso;
     }
 
     public Horario getTimetable()
@@ -57,11 +50,6 @@ public class Sala
     public void setRoomName(String name)
     {
         this.nome = name;
-    }
-
-    public void setFloor(Piso floor)
-    {
-        this.piso = floor;
     }
 
     public void setTimetable(Horario timetable)

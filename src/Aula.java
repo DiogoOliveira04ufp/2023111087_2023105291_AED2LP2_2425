@@ -2,15 +2,15 @@ public class Aula
 {
     private Hora start_time;
     private Hora end_time;
-    private String dia;
+    private Data data_aula;
     private Sala sala;
     private Cadeira cadeira;
 
-    public Aula(Hora start_time, Hora end_time, String dia, Sala sala, Cadeira cadeira)
+    public Aula(Hora start_time, Hora end_time, Data data, Sala sala, Cadeira cadeira)
     {
         this.start_time = start_time;
         this.end_time = end_time;
-        this.dia = dia;
+        this.data_aula = data;
         this.sala = sala;
         this.cadeira = cadeira;
     }
@@ -35,14 +35,14 @@ public class Aula
         this.end_time = end_time;
     }
 
-    public String getWeekDay()
+    public Data getClassDate()
     {
-        return dia;
+        return data_aula;
     }
 
-    public void setWeekDay(String week_day)
+    public void setWeekDay(Data date)
     {
-        this.dia = week_day;
+        this.data_aula = date;
     }
 
     public Sala getRoom()
