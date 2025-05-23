@@ -82,4 +82,27 @@ public class Universidade
         }
         return adjacentes;
     }
+
+    public static void main(String[] args)
+    {
+        Piso piso1 = new Piso(1, new ArrayList<>());
+        Piso piso2 = new Piso(2, new ArrayList<>());
+        Piso piso3 = new Piso(3, new ArrayList<>());
+
+        ArrayList<Piso> pisos = new ArrayList<>();
+        pisos.add(piso1);
+        pisos.add(piso2);
+        pisos.add(piso3);
+
+        Universidade universidade = new Universidade("UFP", new ArrayList<>(), pisos);
+
+        universidade.conectarPisos(piso1, piso2);
+        universidade.conectarPisos(piso2, piso3);
+
+        System.out.println("Piso 1 e Piso 2 conectados: " + universidade.saoConectados(piso1, piso2));
+        System.out.println("Piso 2 e Piso 3 conectados: " + universidade.saoConectados(piso2, piso3));
+        System.out.println("Piso 1 e Piso 3 conectados: " + universidade.saoConectados(piso1, piso3));
+
+        System.out.println("Pisos adjacentes ao Piso 2: " + universidade.getPisosAdjacentes(piso2));
+    }
 }

@@ -42,24 +42,30 @@ public class Professor extends Pessoa
     {
         ArrayList<Sala> salasLivres = new ArrayList<>();
 
-        for(Piso piso : pisos)
+        for (Piso piso : pisos)
         {
-            for(Sala sala : piso.getRooms())
+            for (int pontoId = 0; pontoId < piso.getPoints().size(); pontoId++)
             {
-                boolean salaLivre = true;
+                PontoDePassagem ponto = piso.getPoints().get(pontoId);
 
-                for(Aula aula : sala.getTimetable().getTTLectures())
+                if (ponto instanceof Sala)
                 {
-                    if(aula.getStartTime().isAfter(horaInicio) && aula.getEndTime().isBefore(horaFim))
+                    Sala sala = (Sala) ponto;
+                    boolean salaLivre = true;
+
+                    for(Aula aula : sala.getTimetable().getTTLectures())
                     {
-                        salaLivre = false;
-                        break;
+                        if(!(aula.getEndTime().isBefore(horaInicio) || aula.getStartTime().isAfter(horaFim)))
+                        {
+                            salaLivre = false;
+                            break;
+                        }
                     }
-                }
 
-                if(salaLivre)
-                {
-                    salasLivres.add(sala);
+                    if (salaLivre)
+                    {
+                        salasLivres.add(sala);
+                    }
                 }
             }
         }
