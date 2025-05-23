@@ -1,3 +1,5 @@
+import edu.princeton.cs.algs4.Graph;
+
 import java.util.ArrayList;
 
 public class Universidade
@@ -5,12 +7,14 @@ public class Universidade
     private String nome;
     private ArrayList<Curso> cursos;
     private ArrayList<Piso> pisos;
+    private Graph grafoPisos;
 
     public Universidade(String nome, ArrayList<Curso> cursos, ArrayList<Piso> pisos)
     {
         this.nome = nome;
         this.cursos = cursos;
         this.pisos = pisos;
+        this.grafoPisos = new Graph(pisos.size());
     }
 
     public String getUniName()
@@ -47,5 +51,35 @@ public class Universidade
     public String toString()
     {
         return "Universidade: " + nome + "\n" + "Cursos: " + (cursos.isEmpty() ? "Nenhum curso disponível" : cursos) + "\n" + "Pisos: " + (pisos.isEmpty() ? "Nenhum piso disponível" : pisos);
+    }
+
+    public void conectarPisos(Piso piso1, Piso piso2)
+    {
+        grafoPisos.addEdge(pisos.indexOf(piso1), pisos.indexOf(piso2));
+    }
+
+    public boolean saoConectados(Piso piso1, Piso piso2)
+    {
+        int id1 = pisos.indexOf(piso1);
+        int id2 = pisos.indexOf(piso2);
+
+        for(int adj : grafoPisos.adj(id1))
+        {
+            if(adj == id2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public ArrayList<Piso> getPisosAdjacentes(Piso piso)
+    {
+        ArrayList<Piso> adjacentes = new ArrayList<>();
+        for(int adj : grafoPisos.adj(pisos.indexOf(piso)))
+        {
+            adjacentes.add(pisos.get(adj));
+        }
+        return adjacentes;
     }
 }

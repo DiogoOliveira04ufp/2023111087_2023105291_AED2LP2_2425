@@ -6,21 +6,21 @@ import edu.princeton.cs.algs4.LinearProbingHashST;
 public class Piso
 {
     private int nivel;
-    private ArrayList<Sala> salas;
-    private Graph grafoSalas;
+    private ArrayList<PontoDePassagem> pontos;
+    private Graph grafoPontos;
     private LinearProbingHashST<String, Integer> nomeParaId;
 
-    public Piso(int nivel, ArrayList<Sala> salas)
+    public Piso(int nivel, ArrayList<PontoDePassagem> pontos)
     {
         this.nivel = nivel;
-        this.salas = salas;
-        this.grafoSalas = new Graph(salas.size());
-        this.nomeParaId = new LinearProbingHashST<String, Integer>();
+        this.pontos = pontos;
+        this.grafoPontos = new Graph(pontos.size());
+        this.nomeParaId = new LinearProbingHashST<>();
 
-        // Mapear salas para IDs
-        for (int i = 0; i < salas.size(); i++)
+        // Mapear pontos para IDs
+        for (PontoDePassagem ponto : pontos)
         {
-            nomeParaId.put(salas.get(i).getRoomName(), i);
+            nomeParaId.put(ponto.getNamePP(), ponto.getId());
         }
     }
 
@@ -29,9 +29,9 @@ public class Piso
         this.nivel = level;
     }
 
-    public void setRooms(ArrayList<Sala> salas)
+    public void setPoints(ArrayList<PontoDePassagem> points)
     {
-        this.salas = salas;
+        this.pontos = points;
     }
 
     public int getLevel()
@@ -39,25 +39,21 @@ public class Piso
         return this.nivel;
     }
 
-    public ArrayList<Sala> getRooms()
+    public ArrayList<PontoDePassagem> getPoints()
     {
-        return this.salas;
+        return this.pontos;
     }
 
-    public void conectarSalas(Sala sala1, Sala sala2)
+    public void conectarPontos(PontoDePassagem ponto1, PontoDePassagem ponto2)
     {
-        int id1 = nomeParaId.get(sala1.getRoomName());
-        int id2 = nomeParaId.get(sala2.getRoomName());
-        grafoSalas.addEdge(id1, id2);
+        grafoPontos.addEdge(ponto1.getId(), ponto2.getId());
     }
 
-    public boolean saoConectadas(Sala sala1, Sala sala2)
+    public boolean saoConectados(PontoDePassagem ponto1, PontoDePassagem ponto2)
     {
-        int id1 = nomeParaId.get(sala1.getRoomName());
-        int id2 = nomeParaId.get(sala2.getRoomName());
-        for (int adj : grafoSalas.adj(id1))
+        for (int adj : grafoPontos.adj(ponto1.getId()))
         {
-            if (adj == id2)
+            if (adj == ponto2.getId())
             {
                 return true;
             }
@@ -67,6 +63,6 @@ public class Piso
 
     public Graph getGrafoSalas()
     {
-        return grafoSalas;
+        return grafoPontos;
     }
 }

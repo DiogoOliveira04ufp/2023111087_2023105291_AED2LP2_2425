@@ -1,3 +1,7 @@
+/*
+ * Classe feita em LP no package p01_intro
+ */
+
 public class Data
 {
     private short day;
@@ -183,7 +187,7 @@ public class Data
         System.out.println("2000: " + isLeapYear(2000));
         System.out.print("\n");
 
-        System.out.println("daysMonth");
+        System.out.println("daysMonth()");
         System.out.println("fevereiro 2024: " + daysMonth((short)2, 2024));
         System.out.println("fevereiro 2025: " + daysMonth((short)2, 2025));
         System.out.println("março 2025: " + daysMonth((short)3, 2025));
