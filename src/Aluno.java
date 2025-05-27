@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Aluno extends Pessoa
@@ -26,5 +27,15 @@ public class Aluno extends Pessoa
     public String toString()
     {
         return "Aluno " + this.getName() + "\nEmail: " + this.getEmail() + "\nNumero: " + this.numero + "\nAno: " + this.ano;
+    }
+
+    public static void main(String[] args)
+    {
+        ArrayList<Aula> aulas = new ArrayList<>();
+        Horario horario = new Horario(2, 2, aulas);
+
+        Aluno armindo = new Aluno("armindo", "armindo@ufp.pt", 30, 2, horario);
+
+        System.out.println(armindo);
     }
 }

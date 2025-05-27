@@ -59,20 +59,16 @@ public class Sala extends PontoDePassagem
      */
     public static void main(String[] args)
     {
-        // Criar um objeto Horario para a sala
         Horario horario = new Horario(2025, 1, new ArrayList<>());
 
-        // Criar uma sala
         Sala sala = new Sala(1, "Sala 208", 50, 10, horario);
 
-        // Testar os métodos getters
         System.out.println("Nome da sala: " + sala.getNamePP());
         System.out.println("Capacidade: " + sala.getCapacity());
         System.out.println("Tomadas: " + sala.getOutlets());
         System.out.println("ID: " + sala.getId());
         System.out.println("Horário: " + sala.getTimetable());
 
-        // Testar os métodos setters
         sala.setNamePP("Sala 106");
         sala.setCapacity(60);
         sala.setOutlets(15);
@@ -85,8 +81,6 @@ public class Sala extends PontoDePassagem
         System.out.println("Tomadas: " + sala.getOutlets());
         System.out.println("ID: " + sala.getId());
 
-        // Testar o método toString()
-        System.out.println("\nRepresentação da sala:");
         System.out.println(sala);
     }
 }

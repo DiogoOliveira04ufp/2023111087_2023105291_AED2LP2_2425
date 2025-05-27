@@ -1,4 +1,4 @@
-public abstract class PontoDePassagem
+public class PontoDePassagem
 {
     private int id;
     private String nome;

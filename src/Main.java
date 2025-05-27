@@ -30,5 +30,9 @@ public class Main
         Universidade ufp = new Universidade("UFP", cursos, pisos);
 
         System.out.println(ufp);
+
+//        System.out.println("MENU");
+//        System.out.println("Inserir informações: ");
+//        System.out.println("Ver informações antigas: ");
     }
 }
