@@ -11,10 +11,10 @@ public class Main
         ArrayList<Curso> cursos = new ArrayList<Curso>();
         ArrayList<Piso> pisos = new ArrayList<Piso>();
 
-        Horario horarioAntonio = new Horario(2, 2, cenas);
+        Horario horarioAntonio = new Horario();
         Professor antonio = new Professor("António Pedro", "antoniopedro@ufp.pt", horarioAntonio, 243, "mestrado");
 
-        Horario horarioDiogo = new Horario(2, 2, cenas);
+        Horario horarioDiogo = new Horario();
         Aluno diogo = new Aluno("Diogo Oliveira", "diogooliveira@ufp.pt", 11, 2, horarioDiogo);
 
         System.out.println(antonio);

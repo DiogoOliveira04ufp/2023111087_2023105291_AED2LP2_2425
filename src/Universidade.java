@@ -55,7 +55,29 @@ public class Universidade
 
     public void conectarPisos(Piso piso1, Piso piso2)
     {
-        grafoPisos.addEdge(pisos.indexOf(piso1), pisos.indexOf(piso2));
+        boolean escadaConecta = false;
+
+        for(PontoDePassagem ponto : piso1.getPoints())
+        {
+            if(ponto instanceof Escada)
+            {
+                Escada escada = (Escada) ponto;
+                if(escada.getPisoDestino() == piso2.getLevel())
+                {
+                    escadaConecta = true;
+                    break;
+                }
+            }
+        }
+
+        if(escadaConecta)
+        {
+            grafoPisos.addEdge(pisos.indexOf(piso1), pisos.indexOf(piso2));
+        }
+        else
+        {
+            System.out.println("Não há escada conectando os pisos " + piso1.getLevel() + " e " + piso2.getLevel());
+        }
     }
 
     public boolean saoConectados(Piso piso1, Piso piso2)
@@ -85,9 +107,19 @@ public class Universidade
 
     public static void main(String[] args)
     {
-        Piso piso1 = new Piso(1, new ArrayList<>());
-        Piso piso2 = new Piso(2, new ArrayList<>());
-        Piso piso3 = new Piso(3, new ArrayList<>());
+        Escada escada_1_2 = new Escada(0, "escada 1-2", 1, 2);
+        Escada escada_2_3 = new Escada(1, "escada 2-3", 2, 3);
+        ArrayList<PontoDePassagem> pontos_piso1 = new ArrayList<PontoDePassagem>();
+        ArrayList<PontoDePassagem> pontos_piso2 = new ArrayList<PontoDePassagem>();
+        ArrayList<PontoDePassagem> pontos_piso3 = new ArrayList<PontoDePassagem>();
+        pontos_piso1.add(escada_1_2);
+        pontos_piso2.add(escada_1_2);
+        pontos_piso2.add(escada_2_3);
+        pontos_piso3.add(escada_2_3);
+
+        Piso piso1 = new Piso(1, pontos_piso1);
+        Piso piso2 = new Piso(2, pontos_piso2);
+        Piso piso3 = new Piso(3, pontos_piso3);
 
         ArrayList<Piso> pisos = new ArrayList<>();
         pisos.add(piso1);

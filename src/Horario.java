@@ -1,45 +1,39 @@
 import java.util.ArrayList;
 
+import edu.princeton.cs.algs4.RedBlackBST;
+
 public class Horario
 {
-    private int ano;
-    private int semestre;
-    private ArrayList<Aula> aulas;
+    private RedBlackBST<Hora, Aula> aulas;
 
-    public Horario(int ano, int semestre, ArrayList<Aula> aulas)
+    public Horario()
     {
-        this.ano = ano;
-        this.semestre = semestre;
-        this.aulas = aulas;
+        this.aulas = new RedBlackBST();
     }
 
-    public int getTTYear()
+    public void adicionarAula(Aula aula)
     {
-        return ano;
+        aulas.put(aula.getStartTime(), aula);
     }
 
-    public void setTTYear(int year)
+    public void removerAula(Hora horaInicio)
     {
-        this.ano = year;
+        aulas.delete(horaInicio);
     }
 
-    public int getTTSemestre()
+    public Aula getAula(Hora horaInicio)
     {
-        return semestre;
+        return aulas.get(horaInicio);
     }
 
-    public void setTTSemestre(int semestre)
+    public Iterable<Hora> getAllHoras()
     {
-        this.semestre = semestre;
+        return aulas.keys();
     }
 
-    public ArrayList<Aula> getTTLectures()
+    public Aula getNextAula(Hora horaAtual)
     {
-        return aulas;
-    }
-
-    public void setTTLectures(ArrayList<Aula> lectures)
-    {
-        this.aulas = lectures;
+        Hora nextHora = aulas.ceiling(horaAtual);
+        return nextHora != null ? aulas.get(nextHora) : null;
     }
 }

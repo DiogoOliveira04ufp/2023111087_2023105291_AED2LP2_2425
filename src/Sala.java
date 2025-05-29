@@ -59,7 +59,7 @@ public class Sala extends PontoDePassagem
      */
     public static void main(String[] args)
     {
-        Horario horario = new Horario(2025, 1, new ArrayList<>());
+        Horario horario = new Horario();
 
         Sala sala = new Sala(1, "Sala 208", 50, 10, horario);
 
