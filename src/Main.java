@@ -12,7 +12,7 @@ public class Main
         ArrayList<Piso> pisos = new ArrayList<Piso>();
 
         Horario horarioAntonio = new Horario();
-        Professor antonio = new Professor("António Pedro", "antoniopedro@ufp.pt", horarioAntonio, 243, "mestrado");
+        Professor antonio = new Professor("António Pedro", "antoniopedro@ufp.pt", horarioAntonio, 243, "mestrado", new Hora(3, 0), new Hora(4, 0));
 
         Horario horarioDiogo = new Horario();
         Aluno diogo = new Aluno("Diogo Oliveira", "diogooliveira@ufp.pt", 11, 2, horarioDiogo);

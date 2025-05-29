@@ -43,7 +43,7 @@ public class Hora implements Comparable<Hora>
     }
 
     /**
-     * Corrige o horário caso os valores de hora ou minuto estejam fora dos limites permitidos.
+     * Corrige a hora caso os valores de hora ou minuto estejam fora dos limites permitidos.
      * Ajusta a hora para o intervalo de 0 a 24 e os minutos para o intervalo de 0 a 60.
      */
     public void correctTime()

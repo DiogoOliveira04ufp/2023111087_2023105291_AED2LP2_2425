@@ -4,17 +4,27 @@ public class Professor extends Pessoa
 {
     private final int numero;
     private String qualificacao;
+    private Hora horario_atendimento_inicio;
+    private Hora horario_atendimento_fim;
 
-    public Professor(String nome, String email, Horario horario, int numero, String qualificacao)
+    public Professor(String nome, String email, Horario horario, int numero, String qualificacao, Hora horario_atendimento_inicio, Hora horario_atendimento_fim)
     {
         super(nome, email, horario);
         this.numero = numero;
         this.qualificacao = qualificacao;
+        this.horario_atendimento_inicio = horario_atendimento_inicio;
+        this.horario_atendimento_fim = horario_atendimento_fim;
     }
 
     public void setQualification(String qualification)
     {
         this.qualificacao = qualification;
+    }
+
+    public void setHorarioAtendimento(Hora inicio, Hora fim)
+    {
+        this.horario_atendimento_inicio = inicio;
+        this.horario_atendimento_fim = fim;
     }
 
     public int getProfNumber()
@@ -25,6 +35,16 @@ public class Professor extends Pessoa
     public String getQualification()
     {
         return this.qualificacao;
+    }
+
+    public Hora getHorarioAtendimentoInicio()
+    {
+        return this.horario_atendimento_fim;
+    }
+
+    public Hora getHorarioAtendimentoFim()
+    {
+        return this.horario_atendimento_fim;
     }
 
     public String toString()

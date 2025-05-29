@@ -29,6 +29,34 @@ public class Aluno extends Pessoa
         return "Aluno " + this.getName() + "\nEmail: " + this.getEmail() + "\nNumero: " + this.numero + "\nAno: " + this.ano;
     }
 
+    public ArrayList<Hora> horarioParaReuniao(Professor professor)
+    {
+        ArrayList<Hora> horariosDisponiveis = new ArrayList<>();
+
+        for(Hora horaAluno : this.getTimetable().getAllHoras())
+        {
+            boolean disponivel = true;
+
+            for(Hora horaProfessor : professor.getTimetable().getAllHoras())
+            {
+                Aula aulaProfessor = professor.getTimetable().getAula(horaProfessor);
+
+                if(!(horaAluno.isBefore(aulaProfessor.getStartTime()) || horaAluno.isAfter(aulaProfessor.getEndTime())))
+                {
+                    disponivel = false;
+                    break;
+                }
+            }
+
+            if(disponivel)
+            {
+                horariosDisponiveis.add(horaAluno);
+            }
+        }
+
+        return horariosDisponiveis;
+    }
+
     public static void main(String[] args)
     {
         //ArrayList<Aula> aulas = new ArrayList<>();
