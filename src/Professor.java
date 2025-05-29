@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import edu.princeton.cs.algs4.ST;
 
 public class Professor extends Pessoa
 {
@@ -85,9 +84,12 @@ public class Professor extends Pessoa
         {
             for(Cadeira cadeira: curso.getCourseClasses())
             {
-                if(cadeira.getClassProfessors().contains(this))
+                if(cadeira.getClassProfessors().contains(this.getProfNumber()))
                 {
-                    alunos.addAll(cadeira.getClassStudents());
+                    for(Integer key : cadeira.getClassStudents().keys())
+                    {
+                        alunos.add(cadeira.getClassStudents().get(key));
+                    }
                 }
             }
         }

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import edu.princeton.cs.algs4.RedBlackBST;
 
 public class Horario

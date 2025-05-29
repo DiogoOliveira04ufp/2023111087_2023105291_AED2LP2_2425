@@ -1,13 +1,13 @@
-import java.util.ArrayList;
+import edu.princeton.cs.algs4.ST;
 
 public class Cadeira
 {
     private String nome;
     private int year;
-    private ArrayList<Professor> professores;
-    private ArrayList<Aluno> students;
+    private ST<Integer, Professor> professores;
+    private ST<Integer, Aluno> students;
 
-    public Cadeira(String nome, int ano, ArrayList<Professor> professores, ArrayList<Aluno> alunos)
+    public Cadeira(String nome, int ano, ST<Integer, Professor> professores, ST<Integer, Aluno> alunos)
     {
         this.nome = nome;
         this.year = ano;
@@ -25,12 +25,12 @@ public class Cadeira
         this.year = year;
     }
 
-    public void setClassProfessors(ArrayList<Professor> professors)
+    public void setClassProfessors(ST<Integer, Professor> professors)
     {
         this.professores = professors;
     }
 
-    public void setClassStudents(ArrayList<Aluno> students)
+    public void setClassStudents(ST<Integer, Aluno> students)
     {
         this.students = students;
     }
@@ -45,13 +45,45 @@ public class Cadeira
         return this.year;
     }
 
-    public ArrayList<Professor> getClassProfessors()
+    public ST<Integer, Professor> getClassProfessors()
     {
         return this.professores;
     }
 
-    public ArrayList<Aluno> getClassStudents()
+    public ST<Integer, Aluno> getClassStudents()
     {
         return this.students;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Cadeira: ").append(nome).append("\n");
+        sb.append("Ano: ").append(year).append("\n");
+        sb.append("Lista de Professores:\n");
+
+        for(Integer key : professores.keys())
+        {
+            sb.append(" - ").append(professores.get(key)).append("\n");
+        }
+        sb.append("Lista de Alunos:\n");
+        for(Integer key : students.keys())
+        {
+            sb.append(" - ").append(students.get(key)).append("\n");
+        }
+
+        return sb.toString();
+    }
+
+    public void inserirAluno(Aluno aluno)
+    {
+        this.students.put(aluno.getStudentNumber(), aluno);
+    }
+
+    public void inserirProfessor(Professor professor)
+    {
+        this.professores.put(professor.getProfNumber(), professor);
     }
 }
