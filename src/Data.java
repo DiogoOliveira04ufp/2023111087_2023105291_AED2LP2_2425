@@ -46,6 +46,7 @@ public class Data
     /**
      * Verifica se uma data é depois da data que utiliza este mét0do
      * @param d data a comparar
+     * @return verdadeiro ou falso dependendo se é antes ou depois
      */
     public boolean afterDate(Data d)
     {
@@ -62,6 +63,7 @@ public class Data
     /**
      * Verifica se uma data é antes da data que utiliza este mét0do
      * @param d data a comparar
+     * @return verdadeiro ou falso dependendo se é antes ou depois
      */
     public boolean beforeDate(Data d)
     {
@@ -119,6 +121,7 @@ public class Data
      * Retorna se o ano é bissexto ou não
      * A cada 4 anos um ano é bissexto, exceto se o ano for um novo século (ex.: 1900). No entanto, se o ano do novo século for divisível por 400, já é bissexto
      * @param year a verificar
+     * @return verdadeiro ou falso dependendo se é ano bissexto ou não
      */
     public static boolean isLeapYear(int year)
     {
@@ -142,6 +145,7 @@ public class Data
      * ex.: fevereiro 2024 -> 29 | fevereiro 2025 -> 28 | março 2025 -> 31 | abril 2025 -> 30
      * @param month mês a comparar
      * @param year ano do mês
+     * @return número de dias do mês
      */
     public static int daysMonth(short month, int year)
     {

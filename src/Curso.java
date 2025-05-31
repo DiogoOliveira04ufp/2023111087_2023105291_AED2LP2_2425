@@ -15,15 +15,6 @@ public class Curso
         this.coordenador = coordenador;
     }
 
-    /*
-    public Curso()
-    {
-        this.nome = "Engenharia Informática";
-        this.anos = 3;
-        this
-    }
-    */
-
     public String getCourseName()
     {
         return nome;

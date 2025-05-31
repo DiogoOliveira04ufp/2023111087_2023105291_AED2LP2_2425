@@ -59,6 +59,7 @@ public class Professor extends Pessoa
      * Receber a lista de salas livres num determinado horário
      * @param horaInicio hora onde o horário a pesquisar começa
      * @param horaFim hora onde o horário a pesquisar acaba
+     * @return ArrayList das salas disponíveis
      */
     public ArrayList<Sala> verSalasHorario(Hora horaInicio, Hora horaFim, ArrayList<Piso> pisos)
     {
@@ -100,6 +101,7 @@ public class Professor extends Pessoa
     /**
      * Receber a lista de alunos de um professor
      * @param cursos cursos da universidade onde se irá pesquisar os alunos
+     * @return todos os alunos do professor
      */
     public ArrayList<Aluno> verAlunosProfessor(ArrayList<Curso> cursos)
     {
