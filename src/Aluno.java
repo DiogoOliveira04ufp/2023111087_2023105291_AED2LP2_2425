@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Aluno extends Pessoa
 {
@@ -29,15 +28,19 @@ public class Aluno extends Pessoa
         return "Aluno " + this.getName() + "\nEmail: " + this.getEmail() + "\nNumero: " + this.numero + "\nAno: " + this.ano;
     }
 
+    /**
+     * Pesquisa para verificar em que hora um aluno pode marcar reunião com um professor (cruzar horário do aluno com o professor)
+     * @param professor Professor a verificar horário
+     */
     public ArrayList<Hora> horarioParaReuniao(Professor professor)
     {
         ArrayList<Hora> horariosDisponiveis = new ArrayList<>();
 
-        for(Hora horaAluno : this.getTimetable().getAllHoras())
+        for(Hora horaAluno : this.getTimetable().getAllLectureTimes())
         {
             boolean disponivel = true;
 
-            for(Hora horaProfessor : professor.getTimetable().getAllHoras())
+            for(Hora horaProfessor : professor.getTimetable().getAllLectureTimes())
             {
                 Aula aulaProfessor = professor.getTimetable().getAula(horaProfessor);
 
@@ -57,6 +60,10 @@ public class Aluno extends Pessoa
         return horariosDisponiveis;
     }
 
+    /**
+     * Teste da classe Aluno
+     * @param args argumentos da linha de comandos
+     */
     public static void main(String[] args)
     {
         //ArrayList<Aula> aulas = new ArrayList<>();

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import edu.princeton.cs.algs4.RedBlackBST;
 
 public class Horario
@@ -24,8 +26,20 @@ public class Horario
         return aulas.get(horaInicio);
     }
 
-    public Iterable<Hora> getAllHoras()
+    public Iterable<Aula> getAllLectures()
     {
+        ArrayList<Aula> todas = new ArrayList<>();
+        for (Hora h : aulas.keys())
+        {
+            Aula a = aulas.get(h);
+
+            if (a != null)
+                todas.add(a);
+        }
+        return (Iterable<Aula>)todas;
+    }
+
+    public Iterable<Hora> getAllLectureTimes() {
         return aulas.keys();
     }
 

@@ -33,6 +33,19 @@ public class Hora implements Comparable<Hora>
     }
 
     @Override
+    public String toString()
+    {
+        if(minuto >= 10)
+        {
+            return hora + ":" + minuto;
+        }
+        else
+        {
+            return hora + ":0" + minuto;
+        }
+    }
+
+    @Override
     public int compareTo(Hora outraHora)
     {
         if (this.hora != outraHora.hora)
