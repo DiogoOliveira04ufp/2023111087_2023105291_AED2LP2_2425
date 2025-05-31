@@ -29,22 +29,21 @@ public class Aluno extends Pessoa
     }
 
     /**
-     * Pesquisa para verificar em que hora um aluno pode marcar reunião com um professor (cruzar horário do aluno com o professor)
-     * @param professor Professor a verificar horário
+     * Pesquisa para verificar em que horas um aluno pode marcar reunião com um professor (cruzar horário do aluno com o professor)
+     * @param professor Professor a verificar horário de atendimento
      */
     public ArrayList<Hora> horarioParaReuniao(Professor professor)
     {
         ArrayList<Hora> horariosDisponiveis = new ArrayList<>();
 
-        for(Hora horaAluno : this.getTimetable().getAllLectureTimes())
+        Hora horaAtendimento = professor.getHorarioAtendimentoInicio();
+        while(horaAtendimento.isBefore(professor.getHorarioAtendimentoFim()))
         {
             boolean disponivel = true;
 
-            for(Hora horaProfessor : professor.getTimetable().getAllLectureTimes())
+            for(Aula aulaAluno : this.getTimetable().getAllLectures())
             {
-                Aula aulaProfessor = professor.getTimetable().getAula(horaProfessor);
-
-                if(!(horaAluno.isBefore(aulaProfessor.getStartTime()) || horaAluno.isAfter(aulaProfessor.getEndTime())))
+                if(!(horaAtendimento.isBefore(aulaAluno.getStartTime()) || horaAtendimento.isAfter(aulaAluno.getEndTime())))
                 {
                     disponivel = false;
                     break;
@@ -53,8 +52,11 @@ public class Aluno extends Pessoa
 
             if(disponivel)
             {
-                horariosDisponiveis.add(horaAluno);
+                horariosDisponiveis.add(new Hora(horaAtendimento.getHour(), horaAtendimento.getMinute()));
             }
+
+            // Incrementa 30 minutos
+            horaAtendimento = new Hora(horaAtendimento.getHour(), horaAtendimento.getMinute() + 30);
         }
 
         return horariosDisponiveis;
@@ -66,10 +68,24 @@ public class Aluno extends Pessoa
      */
     public static void main(String[] args)
     {
-        //ArrayList<Aula> aulas = new ArrayList<>();
-
         Aluno armindo = new Aluno("armindo", "armindo@ufp.pt", 30, 2, new Horario());
-
         System.out.println(armindo);
+
+        Hora meio_dia = new Hora(12, 0);
+        Hora uma = new Hora(13, 0);
+        Hora duas = new Hora(14, 0);
+        Hora tres = new Hora(15, 0);
+        Hora quatro = new Hora(16, 0);
+        Hora cinco = new Hora(17, 0);
+        Hora seis = new Hora(18, 0);
+
+        Aluno jose = new Aluno("José", "jose@ufp.pt", 31, 2, new Horario());
+        Professor antonio = new Professor("António", "antonio@ufp.pt", new Horario(), 3, "mestrado", duas, quatro);
+
+        armindo.getTimetable().adicionarAula(new Aula(meio_dia, uma, new Data((short)31, (short)5, 2025), null, null));
+        jose.getTimetable().adicionarAula(new Aula(duas, quatro, new Data((short)31, (short)5, 2025), null, null));
+
+        System.out.println("Horários para Armindo (pode): " + armindo.horarioParaReuniao(antonio));
+        System.out.println("Horários para José (não pode): " + jose.horarioParaReuniao(antonio));
     }
 }

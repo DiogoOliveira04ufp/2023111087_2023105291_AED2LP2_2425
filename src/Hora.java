@@ -61,13 +61,13 @@ public class Hora implements Comparable<Hora>
      */
     public void correctTime()
     {
-        while(hora > 24 || minuto > 60)
+        while(hora >= 24 || minuto >= 60)
         {
-            while(hora > 24)
+            while(hora >= 24)
             {
                 hora = hora - 24;
             }
-            while(minuto > 60)
+            while(minuto >= 60)
             {
                 minuto = minuto - 60;
                 hora++;

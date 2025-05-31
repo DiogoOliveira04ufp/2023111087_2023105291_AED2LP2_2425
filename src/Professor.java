@@ -42,7 +42,7 @@ public class Professor extends Pessoa
 
     public Hora getHorarioAtendimentoInicio()
     {
-        return this.horario_atendimento_fim;
+        return this.horario_atendimento_inicio;
     }
 
     public Hora getHorarioAtendimentoFim()
