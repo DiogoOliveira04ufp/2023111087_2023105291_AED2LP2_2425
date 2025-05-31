@@ -81,9 +81,9 @@ public class Hora implements Comparable<Hora>
      */
     public boolean isBefore(Hora hora)
     {
-        if(hora.hora < this.hora)
+        if(this.hora < hora.hora)
             return true;
-        else if(hora.hora == this.hora && hora.minuto < this.minuto)
+        else if(this.hora == hora.hora && this.minuto < hora.minuto)
             return true;
         else
             return false;
@@ -95,9 +95,9 @@ public class Hora implements Comparable<Hora>
      */
     public boolean isAfter(Hora hora)
     {
-        if(hora.hora > this.hora)
+        if(this.hora > hora.hora)
             return true;
-        else if(hora.hora == this.hora && hora.minuto > this.minuto)
+        else if(this.hora == hora.hora && this.minuto > hora.minuto)
             return true;
         else
             return false;

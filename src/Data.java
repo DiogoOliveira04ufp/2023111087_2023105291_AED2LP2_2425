@@ -44,7 +44,7 @@ public class Data
     }
 
     /**
-     * Verifica se uma data é depois da data que utiliza este método
+     * Verifica se uma data é depois da data que utiliza este mét0do
      * @param d data a comparar
      */
     public boolean afterDate(Data d)
@@ -60,7 +60,7 @@ public class Data
     }
 
     /**
-     * Verifica se uma data é antes da data que utiliza este método
+     * Verifica se uma data é antes da data que utiliza este mét0do
      * @param d data a comparar
      */
     public boolean beforeDate(Data d)
