@@ -1,28 +1,21 @@
 import java.util.ArrayList;
 
-import edu.princeton.cs.algs4.BreadthFirstPaths;
-import edu.princeton.cs.algs4.Graph;
-import edu.princeton.cs.algs4.LinearProbingHashST;
+import edu.princeton.cs.algs4.CC;
+import edu.princeton.cs.algs4.Edge;
+import edu.princeton.cs.algs4.EdgeWeightedGraph;
+import edu.princeton.cs.algs4.DijkstraUndirectedSP;
 
 public class Piso
 {
     private int nivel;
     private ArrayList<PontoDePassagem> pontos;
-    private Graph grafoPontos;
-    private LinearProbingHashST<String, Integer> nomeParaId;
+    private EdgeWeightedGraph grafoPontos;
 
     public Piso(int nivel, ArrayList<PontoDePassagem> pontos)
     {
         this.nivel = nivel;
         this.pontos = pontos;
-        this.grafoPontos = new Graph(pontos.size());
-        this.nomeParaId = new LinearProbingHashST<>();
-
-        // Mapear pontos para IDs
-        for (PontoDePassagem ponto : pontos)
-        {
-            nomeParaId.put(ponto.getNamePP(), ponto.getId());
-        }
+        this.grafoPontos = new EdgeWeightedGraph(pontos.size());
     }
 
     public void setLevel(int level)
@@ -45,16 +38,17 @@ public class Piso
         return this.pontos;
     }
 
-    public void conectarPontos(PontoDePassagem ponto1, PontoDePassagem ponto2)
+    public void conectarPontos(PontoDePassagem ponto1, PontoDePassagem ponto2, double peso)
     {
-        grafoPontos.addEdge(ponto1.getId(), ponto2.getId());
+        Edge edge = new Edge(ponto1.getId(), ponto2.getId(), peso);
+        grafoPontos.addEdge(edge);
     }
 
     public boolean saoConectados(PontoDePassagem ponto1, PontoDePassagem ponto2)
     {
-        for (int adj : grafoPontos.adj(ponto1.getId()))
+        for (Edge edge : grafoPontos.adj(ponto1.getId()))
         {
-            if (adj == ponto2.getId())
+            if (edge.other(ponto1.getId()) == ponto2.getId())
             {
                 return true;
             }
@@ -62,26 +56,28 @@ public class Piso
         return false;
     }
 
-    public Graph getGrafoSalas()
-    {
-        return grafoPontos;
-    }
-
     public ArrayList<PontoDePassagem> caminhoMaisCurto(PontoDePassagem ponto1, PontoDePassagem ponto2)
     {
         ArrayList<PontoDePassagem> caminho = new ArrayList<>();
-        BreadthFirstPaths bfs = new BreadthFirstPaths(grafoPontos, ponto1.getId());
+        DijkstraUndirectedSP dijkstra = new DijkstraUndirectedSP(grafoPontos, ponto1.getId());
 
-        if(bfs.hasPathTo(ponto2.getId()))
+        if(dijkstra.hasPathTo(ponto2.getId()))
         {
-            for(int id : bfs.pathTo(ponto2.getId()))
+            for(Edge edge : dijkstra.pathTo(ponto2.getId()))
             {
+                int id1 = edge.either();
+                int id2 = edge.other(id1);
+
+                // Adicionar ambos os pontos da aresta ao caminho, se ainda não estiverem
                 for(PontoDePassagem ponto : pontos)
                 {
-                    if(ponto.getId() == id)
+                    if(ponto.getId() == id1 && !caminho.contains(ponto))
                     {
                         caminho.add(ponto);
-                        break;
+                    }
+                    if(ponto.getId() == id2 && !caminho.contains(ponto))
+                    {
+                        caminho.add(ponto);
                     }
                 }
             }
@@ -90,15 +86,19 @@ public class Piso
         return caminho;
     }
 
+    public boolean pisoEConexo()
+    {
+        CC cc = new CC(grafoPontos);
+        return cc.count() == 1; // Retorna true se o grafo tiver apenas 1 componente conectado
+    }
+
     public static void main(String[] args)
     {
-        // Criar pontos de passagem
         PontoDePassagem sala1 = new Sala(0, "Sala 101", 30, 5, null);
         PontoDePassagem sala2 = new Sala(1, "Sala 102", 40, 6, null);
         PontoDePassagem sala3 = new Sala(2, "Sala 103", 50, 8, null);
         PontoDePassagem escada = new Escada(3, "Escada A", 1, 2);
 
-        // Adicionar pontos ao piso
         ArrayList<PontoDePassagem> pontos = new ArrayList<>();
         pontos.add(sala1);
         pontos.add(sala2);
@@ -107,21 +107,25 @@ public class Piso
 
         Piso piso = new Piso(1, pontos);
 
-        // Conectar os pontos
-        piso.conectarPontos(sala1, sala2);
-        piso.conectarPontos(sala2, escada);
-        piso.conectarPontos(escada, sala3);
+        piso.conectarPontos(sala1, sala2, 1);
+        piso.conectarPontos(sala2, escada, 1);
+        piso.conectarPontos(escada, sala3, 1);
+        piso.conectarPontos(sala3, sala1, 1);
 
-        // Testar o caminho mais curto
         ArrayList<PontoDePassagem> caminho = piso.caminhoMaisCurto(sala1, sala3);
 
-        // Exibir o caminho
         System.out.println("Caminho mais curto entre Sala 101 e Sala 103:");
         for (PontoDePassagem ponto : caminho)
         {
             System.out.println(ponto.getNamePP());
         }
 
-        //Universidade ufp = new Universidade()
+        System.out.println(piso.pisoEConexo());
+
+        piso.grafoPontos = new EdgeWeightedGraph(pontos.size());
+        piso.conectarPontos(sala1, sala2, 1);
+        piso.conectarPontos(escada, sala3, 1);
+
+        System.out.println(piso.pisoEConexo());
     }
 }

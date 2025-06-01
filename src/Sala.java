@@ -67,7 +67,6 @@ public class Sala extends PontoDePassagem
         System.out.println("Capacidade: " + sala.getCapacity());
         System.out.println("Tomadas: " + sala.getOutlets());
         System.out.println("ID: " + sala.getId());
-        System.out.println("Horário: " + sala.getTimetable());
 
         sala.setNamePP("Sala 106");
         sala.setCapacity(60);
