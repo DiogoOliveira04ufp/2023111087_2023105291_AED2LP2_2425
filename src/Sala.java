@@ -55,6 +55,7 @@ public class Sala extends PontoDePassagem {
         salas.sort(Comparator.comparingInt(Sala::getCapacity).reversed());
         return salas;
     }
+
     // Extrai o número da sala do nome, ex: "Sala 208" -> 208
     public static int extrairNumeroSala(String nomeSala) {
         String[] partes = nomeSala.split(" ");
