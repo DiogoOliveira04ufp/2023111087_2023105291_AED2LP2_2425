@@ -73,13 +73,13 @@ public class Professor extends Pessoa
                 {
                     Sala sala = (Sala) ponto;
                     boolean salaLivre = true;
-                    //System.out.println("Verificando sala: " + sala.getNamePP());
+                    System.out.println("Verificando sala: " + sala.getNamePP());
 
                     for(Aula aula : sala.getTimetable().getAllLectures())
                     {
-                        //System.out.println("Aula: " + aula.getStartTime() + " - " + aula.getEndTime());
-                        //System.out.println("Intervalo: " + horaInicio + " - " + horaFim);
-                        //System.out.println("Sobreposição: " + !(aula.getEndTime().isBefore(horaInicio) || aula.getStartTime().isAfter(horaFim)) + "\n\n");
+                        System.out.println("Aula: " + aula.getStartTime() + " - " + aula.getEndTime());
+                        System.out.println("Intervalo: " + horaInicio + " - " + horaFim);
+                        System.out.println("Sobreposição: " + !(aula.getEndTime().isBefore(horaInicio) || aula.getStartTime().isAfter(horaFim)) + "\n\n");
                         if(!(aula.getEndTime().isBefore(horaInicio) || aula.getStartTime().isAfter(horaFim)))
                         {
                             salaLivre = false;

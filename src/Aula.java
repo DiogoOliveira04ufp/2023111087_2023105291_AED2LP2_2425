@@ -13,6 +13,8 @@ public class Aula
         this.data_aula = data;
         this.sala = sala;
         this.cadeira = cadeira;
+
+
     }
 
     public Hora getStartTime()
@@ -64,4 +66,5 @@ public class Aula
     {
         this.cadeira = cadeira;
     }
+
 }

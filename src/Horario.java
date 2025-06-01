@@ -39,8 +39,7 @@ public class Horario
         return (Iterable<Aula>)todas;
     }
 
-    public Iterable<Hora> getAllLectureTimes()
-    {
+    public Iterable<Hora> getAllLectureTimes() {
         return aulas.keys();
     }
 
@@ -62,8 +61,7 @@ public class Horario
      * @param horaAtual hora a partir da qual fazer a pesquisa
      * @return proxima aula
      */
-    public Aula getNextAula(Hora horaAtual)
-    {
+    public Aula getNextAula(Hora horaAtual) {
         Hora nextHora = aulas.ceiling(horaAtual);
         return nextHora != null ? aulas.get(nextHora) : null;
     }
