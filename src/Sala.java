@@ -55,57 +55,99 @@ public class Sala extends PontoDePassagem
         return "Sala " + getNamePP() + "\ncapacidade: " + capacidade + "\ntomadas: " + tomadas;
     }
 
-    // Método para ordenar as salas por tomadas (ordem decrescente)
-    public static List<Sala> ordenarPorTomadasDesc(List<Sala> salas) {
+    /**
+     * Ordenar as salas por tomadas (ordem decrescente)
+     * @param salas salas a ordenar
+     * @return salas ordenadas
+     */
+    public static List<Sala> ordenarPorTomadasDesc(List<Sala> salas)
+    {
         salas.sort(Comparator.comparingInt(Sala::getOutlets).reversed());
         return salas;
     }
-    public static List<Sala> ordenarPorCapacidadeDesc(List<Sala> salas) {
+
+    /**
+     * Ordenar salas por capaciade
+     * @param salas salas a ordenar
+     * @return salas ordenadas
+     */
+    public static List<Sala> ordenarPorCapacidadeDesc(List<Sala> salas)
+    {
         salas.sort(Comparator.comparingInt(Sala::getCapacity).reversed());
         return salas;
     }
 
-    // Extrai o número da sala do nome, ex: "Sala 208" -> 208
-    public static int extrairNumeroSala(String nomeSala) {
+    /**
+     * Extrai o número da sala do nome, ex: "Sala 208" -> 208
+     * @param nomeSala nome da salas
+     * @return número da sala
+     */
+    public static int extrairNumeroSala(String nomeSala)
+    {
         String[] partes = nomeSala.split(" ");
         return Integer.parseInt(partes[1]);
     }
 
-    public static String identificarPiso(int numeroSala) {
-        if (numeroSala >= 101 && numeroSala < 121) return "1º Andar";
-        if (numeroSala >= 201 && numeroSala < 221) return "2º Andar";
-        if (numeroSala >= 301 && numeroSala < 321) return "3º Andar";
+    /**
+     * Retorna piso da sala
+     * @param numeroSala numero da sala
+     * @return piso
+     */
+    public static String identificarPiso(int numeroSala)
+    {
+        if (numeroSala >= 101 && numeroSala < 121)
+            return "1º Andar";
+        if (numeroSala >= 201 && numeroSala < 221)
+            return "2º Andar";
+        if (numeroSala >= 301 && numeroSala < 321)
+            return "3º Andar";
         return "Sala não encontrada ou inexistente";
     }
-    // Mostra as salas agrupadas por piso e ordenadas pelo número
+
+    /**
+     * Mostra as salas agrupadas por piso e ordenadas pelo número
+     * @param salas salas a ordenar
+     */
     public static void mostrarSalasPorPisoOrdenadas(List<Sala> salas) {
         HashMap<String, List<Sala>> agrupadas = new HashMap<>();
-        for (Sala sala : salas) {
+        for(Sala sala : salas)
+        {
             int numero = extrairNumeroSala(sala.getNamePP());
             String piso = identificarPiso(numero);
             agrupadas.computeIfAbsent(piso, k -> new ArrayList<>()).add(sala);
         }
 
-        for (String piso : new String[]{"1º Andar", "2º Andar", "3º Andar"}) {
+        for(String piso : new String[]{"1º Andar", "2º Andar", "3º Andar"})
+        {
             List<Sala> lista = agrupadas.get(piso);
-            if (lista != null && !lista.isEmpty()) {
+            if(lista != null && !lista.isEmpty())
+            {
                 lista.sort(Comparator.comparingInt(s -> extrairNumeroSala(s.getNamePP())));
                 System.out.println(piso + ":");
-                for (Sala sala : lista) {
+                for(Sala sala : lista)
+                {
                     System.out.println("  " + sala.getNamePP());
                 }
             }
         }
         // Salas não encontradas
         List<Sala> naoEncontradas = agrupadas.get("Sala não encontrada ou inexistente");
-        if (naoEncontradas != null && !naoEncontradas.isEmpty()) {
+        if(naoEncontradas != null && !naoEncontradas.isEmpty())
+        {
             System.out.println("Sala não encontrada ou inexistente:");
-            for (Sala sala : naoEncontradas) {
+            for(Sala sala : naoEncontradas)
+            {
                 System.out.println("  " + sala.getNamePP());
             }
         }
     }
-    public static void main(String[] args) {
+
+    /**
+     * Teste da classe Sala
+     * @param args argumentos da linha de comandos
+     */
+    public static void main(String[] args)
+    {
         Horario horario = new Horario();
 
         Sala sala1 = new Sala(1, "Sala 208", 50, 10, horario);
