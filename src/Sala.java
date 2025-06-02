@@ -5,6 +5,9 @@ import java.util.List;
 
 import edu.princeton.cs.algs4.Graph;
 
+/**
+ * Vértices dos grafos dos pisos.
+ */
 public class Sala extends PontoDePassagem
 {
     private int capacidade;

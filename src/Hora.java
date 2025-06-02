@@ -1,3 +1,8 @@
+import static java.lang.Integer.parseInt;
+
+/**
+ * Classe feita por nós para utilizar horas de uma maneira mais simples.
+ */
 public class Hora implements Comparable<Hora>
 {
     private int hora;
@@ -7,6 +12,14 @@ public class Hora implements Comparable<Hora>
     {
         this.hora = hora;
         this.minuto = minuto;
+        this.correctTime();
+    }
+
+    public Hora(String hora)
+    {
+        String[] hora_minutos = hora.split(":");
+        this.hora = parseInt(hora_minutos[0]);
+        this.minuto = parseInt(hora_minutos[1]);
         this.correctTime();
     }
 

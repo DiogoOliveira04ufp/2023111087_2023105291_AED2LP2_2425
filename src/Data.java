@@ -1,7 +1,7 @@
-/*
- * Classe feita em LP no package p01_intro
+/**
+ * <p>Classe feita por nós para utilizar datas de uma maneira mais simples.</p>
+ * <p>Classe feita em LP no package p01_intro</p>
  */
-
 public class Data
 {
     private short day;

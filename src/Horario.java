@@ -2,6 +2,9 @@ import java.util.ArrayList;
 
 import edu.princeton.cs.algs4.RedBlackBST;
 
+/**
+ * Classe para representar os horários; ou de uma pessoa, ou de uma sala. Utiliza uma Red Black BST para armazenar as Aulas.
+ */
 public class Horario
 {
     private RedBlackBST<Hora, Aula> aulas;

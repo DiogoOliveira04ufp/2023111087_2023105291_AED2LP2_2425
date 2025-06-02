@@ -2,6 +2,9 @@ import edu.princeton.cs.algs4.Graph;
 
 import java.util.ArrayList;
 
+/**
+ * Representa o edifício completo da universidade, com um ArrayList de cursos onde estarão os objetos dos alunos e professores e o grafo do edifício completo
+ */
 public class Universidade
 {
     private String nome;

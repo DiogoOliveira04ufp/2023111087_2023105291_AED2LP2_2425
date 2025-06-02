@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Aluno da universidade, armazenado em Symbol Tables num objeto da classe Cadeira. Herda a classe Pessoa.
+ */
 public class Aluno extends Pessoa
 {
     private final int numero;
@@ -125,5 +128,12 @@ public class Aluno extends Pessoa
 
         System.out.println("Horários para Armindo (pode): " + armindo.horarioParaReuniao(antonio));
         System.out.println("Horários para José (não pode): " + jose.horarioParaReuniao(antonio));
+        System.out.println();
+
+        armindo.escreverFicheiro("teste.txt");
+        jose.escreverFicheiro("teste.txt");
+
+        Aluno teste = new Aluno("", "", 0, 0, null);
+        teste.lerFicheiro("teste.txt");
     }
 }

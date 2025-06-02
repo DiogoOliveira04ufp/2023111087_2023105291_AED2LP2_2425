@@ -1,3 +1,6 @@
+/**
+ * Classe genérica para os vértices dos grafos dos pisos. Não é abstrata porque pode ser um ponto que não seja uma sala ou escada.
+ */
 public class PontoDePassagem
 {
     private int id;

@@ -1,5 +1,8 @@
 import edu.princeton.cs.algs4.ST;
 
+/**
+ * Classe para representar cadeiras (unidades curriculares) de um dado curso. As Symbol Tables dos alunos e professores estarão aqui armazenadas.
+ */
 public class Cadeira
 {
     private String nome;

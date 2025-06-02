@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+/**
+ * Representa um curso que pode ter vários anos ou várias cadeiras, e ainda um professor coordenador.
+ */
 public class Curso
 {
     private String nome;

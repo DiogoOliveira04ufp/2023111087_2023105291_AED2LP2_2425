@@ -1,3 +1,6 @@
+/**
+ * Vértices dos grafos dos pisos. Irão servir de ponto de ligação entre pisos diferentes.
+ */
 public class Escada extends PontoDePassagem
 {
     private int pisoOrigem;

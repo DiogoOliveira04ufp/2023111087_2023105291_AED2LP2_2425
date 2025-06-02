@@ -1,3 +1,6 @@
+/**
+ * Classe que será utilizada na classe Horario, apenas para ser uma célula da tabela. Terá objetos das classes Hora, Data, Sala e Cadeira.
+ */
 public class Aula
 {
     private Hora start_time;

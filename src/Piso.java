@@ -5,6 +5,9 @@ import edu.princeton.cs.algs4.Edge;
 import edu.princeton.cs.algs4.EdgeWeightedGraph;
 import edu.princeton.cs.algs4.DijkstraUndirectedSP;
 
+/**
+ * Grafos que representam cada piso da universidade. Poderão ter vários pontos de passagem (salas ou outros tipos de pontos), e estarão ligados a outros pisos pelas escadas.
+ */
 public class Piso
 {
     private int nivel;
