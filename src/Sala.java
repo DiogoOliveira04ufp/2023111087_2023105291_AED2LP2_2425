@@ -78,9 +78,9 @@ public class Sala extends PontoDePassagem
     }
 
     /**
-     * Extrai o número da sala do nome, ex: "Sala 208" -> 208
-     * @param nomeSala nome da salas
-     * @return número da sala
+     * Extrai o número da sala (integer) do nome (string), ex: "Sala 208" -> 208
+     * @param nomeSala nome da salas (string)
+     * @return número da sala (integer)
      */
     public static int extrairNumeroSala(String nomeSala)
     {
@@ -108,7 +108,8 @@ public class Sala extends PontoDePassagem
      * Mostra as salas agrupadas por piso e ordenadas pelo número
      * @param salas salas a ordenar
      */
-    public static void mostrarSalasPorPisoOrdenadas(List<Sala> salas) {
+    public static void mostrarSalasPorPisoOrdenadas(List<Sala> salas)
+    {
         HashMap<String, List<Sala>> agrupadas = new HashMap<>();
         for(Sala sala : salas)
         {

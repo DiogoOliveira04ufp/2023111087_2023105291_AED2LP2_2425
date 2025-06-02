@@ -53,6 +53,11 @@ public class Universidade
         return "Universidade: " + nome + "\n" + "Cursos: " + (cursos.isEmpty() ? "Nenhum curso disponível" : cursos) + "\n" + "Pisos: " + (pisos.isEmpty() ? "Nenhum piso disponível" : pisos);
     }
 
+    /**
+     * Conectar dois grafos de pisos pelas suas escadas
+     * @param piso1 primeiro piso a conectar
+     * @param piso2 segundo piso a conectar
+     */
     public void conectarPisos(Piso piso1, Piso piso2)
     {
         boolean escadaConecta = false;
@@ -80,6 +85,12 @@ public class Universidade
         }
     }
 
+    /**
+     * Verificar se dois pisos são conectados
+     * @param piso1 primeiro piso conectado
+     * @param piso2 segundo piso conectado
+     * @return verdadeiro se são conectado || falso se não são conectados
+     */
     public boolean saoConectados(Piso piso1, Piso piso2)
     {
         int id1 = pisos.indexOf(piso1);
@@ -95,6 +106,11 @@ public class Universidade
         return false;
     }
 
+    /**
+     * Retornar ArrayList de pisos adjacentes a um dado piso
+     * @param piso piso a verificar
+     * @return ArrayList dos pisos adjacentes
+     */
     public ArrayList<Piso> getPisosAdjacentes(Piso piso)
     {
         ArrayList<Piso> adjacentes = new ArrayList<>();
@@ -105,6 +121,10 @@ public class Universidade
         return adjacentes;
     }
 
+    /**
+     * Teste da classe Universidade
+     * @param args argumentos da linha de comandos
+     */
     public static void main(String[] args)
     {
         Escada escada_1_2 = new Escada(0, "escada 1-2", 1, 2);

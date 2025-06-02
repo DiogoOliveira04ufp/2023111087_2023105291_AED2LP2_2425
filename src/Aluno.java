@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 
 public class Aluno extends Pessoa
@@ -26,6 +27,43 @@ public class Aluno extends Pessoa
     public String toString()
     {
         return "Aluno " + this.getName() + "\nEmail: " + this.getEmail() + "\nNumero: " + this.numero + "\nAno: " + this.ano;
+    }
+
+    @Override
+    public void escreverFicheiro(String file_path)
+    {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file_path, true)))
+        {
+            writer.write(this.getName() + ";" + this.getEmail() + ";" + this.numero + ";" + this.ano);
+            writer.newLine();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void lerFicheiro(String file_path)
+    {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file_path)))
+        {
+            String linha;
+            while((linha = reader.readLine()) != null)
+            {
+                String[] dados = linha.split(";");
+                String nome = dados[0];
+                String email = dados[1];
+                int numero = Integer.parseInt(dados[2]);
+                int ano = Integer.parseInt(dados[3]);
+                // Criar um novo objeto Aluno ou atualizar os dados
+                System.out.println("Aluno lido: " + nome + ", " + email + ", " + numero + ", " + ano);
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**

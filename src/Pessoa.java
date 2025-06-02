@@ -1,6 +1,4 @@
-import java.util.List;
-
-public abstract class Pessoa
+public abstract class Pessoa implements Ficheiros
 {
     private String nome;
     private String email;

@@ -38,12 +38,24 @@ public class Piso
         return this.pontos;
     }
 
+    /**
+     * Conecta dois pontos no grafo com o peso dado
+     * @param ponto1 primeiro ponto a conectar
+     * @param ponto2 segundo ponto a conectar
+     * @param peso peso da aresta
+     */
     public void conectarPontos(PontoDePassagem ponto1, PontoDePassagem ponto2, double peso)
     {
         Edge edge = new Edge(ponto1.getId(), ponto2.getId(), peso);
         grafoPontos.addEdge(edge);
     }
 
+    /**
+     * Retorna se dois pontos estão conectados no grafo
+     * @param ponto1 primeiro ponto a verificar
+     * @param ponto2 segundo ponto a verificar
+     * @return verdadeiro se é conectado || falso se não é conectado
+     */
     public boolean saoConectados(PontoDePassagem ponto1, PontoDePassagem ponto2)
     {
         for (Edge edge : grafoPontos.adj(ponto1.getId()))
@@ -56,6 +68,12 @@ public class Piso
         return false;
     }
 
+    /**
+     * Utilizar Dijkstra para descobrir o caminho mais curto entre dois pontos
+     * @param ponto1 primeiro ponto
+     * @param ponto2 segundo ponto
+     * @return ArrayList de pontos por onde se tem de passar, na ordem por onde se tem de passar
+     */
     public ArrayList<PontoDePassagem> caminhoMaisCurto(PontoDePassagem ponto1, PontoDePassagem ponto2)
     {
         ArrayList<PontoDePassagem> caminho = new ArrayList<>();
@@ -86,12 +104,20 @@ public class Piso
         return caminho;
     }
 
+    /**
+     * Verificar se o grafo do piso é conexo, ou seja, pode-se chegar a todas os pontos do piso a partir de qualquer um dos seus outros pontos
+     * @return verdadeiro -> o piso é conexo || falso -> o piso não é conexo
+     */
     public boolean pisoEConexo()
     {
         CC cc = new CC(grafoPontos);
-        return cc.count() == 1; // Retorna true se o grafo tiver apenas 1 componente conectado
+        return cc.count() == 1;         // Retorna true se o grafo tiver apenas 1 componente conectado
     }
 
+    /**
+     * Teste da classe Piso
+     * @param args argumentos da linha de comandos
+     */
     public static void main(String[] args)
     {
         PontoDePassagem sala1 = new Sala(0, "Sala 101", 30, 5, null);
