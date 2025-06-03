@@ -58,45 +58,6 @@ public class Professor extends Pessoa
         return "Professor " + this.getName() + "\nEmail: " + this.getEmail() + "\nNumero: " + this.numero + "\nQualificação: " + this.qualificacao;
     }
 
-    @Override
-    public void escreverFicheiro(String file_path)
-    {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file_path, true)))
-        {
-            writer.write(this.getName() + ";" + this.getEmail() + ";" + this.numero + ";" + this.qualificacao + ";" + this.horario_atendimento_inicio + ";" + this.horario_atendimento_fim);
-            writer.newLine();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void lerFicheiro(String file_path)
-    {
-        try(BufferedReader reader = new BufferedReader(new FileReader(file_path)))
-        {
-            String linha;
-            while((linha = reader.readLine()) != null)
-            {
-                String[] dados = linha.split(";");
-                String nome = dados[0];
-                String email = dados[1];
-                int numero = Integer.parseInt(dados[2]);
-                String qualificacao = dados[3];
-                Hora horario_atendimento_inicio = new Hora(dados[4]);
-                Hora horario_atendimento_fim = new Hora(dados[5]);
-                // Criar um novo objeto Aluno ou atualizar os dados
-                System.out.println("Professor lido: " + nome + ", " + email + ", " + numero + ", " + qualificacao + ", " + horario_atendimento_inicio + ", " + horario_atendimento_fim);
-            }
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     /**
      * Receber a lista de salas livres num determinado horário
      * @param horaInicio hora onde o horário a pesquisar começa
@@ -272,5 +233,6 @@ public class Professor extends Pessoa
         {
             System.out.println(sala.getNamePP());
         }
+        System.out.println();
     }
 }

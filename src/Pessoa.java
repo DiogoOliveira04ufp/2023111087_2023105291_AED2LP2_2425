@@ -1,7 +1,7 @@
 /**
  * Classe abstrata que será herdada pelas classes Aluno e Professor.
  */
-public abstract class Pessoa implements Ficheiros
+public abstract class Pessoa
 {
     private String nome;
     private String email;

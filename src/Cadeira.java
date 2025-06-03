@@ -1,3 +1,5 @@
+import java.io.*;
+
 import edu.princeton.cs.algs4.ST;
 
 /**
@@ -80,6 +82,74 @@ public class Cadeira
         return sb.toString();
     }
 
+    public void escreverFicheiroCadeira(String file_path)
+    {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file_path, false)))
+        {
+            writer.write("Cadeira;" + this.nome + ";" + this.year);
+            writer.newLine();
+            for(Integer key : professores.keys())
+            {
+                Professor p = professores.get(key);
+                writer.write("Professor;" + p.getProfNumber() + ";" + p.getName() + ";" + p.getEmail() + ";" + p.getQualification());
+                writer.newLine();
+            }
+            for(Integer key : students.keys())
+            {
+                Aluno a = students.get(key);
+                writer.write("Aluno;" + a.getStudentNumber() + ";" + a.getName() + ";" + a.getEmail() + ";" + a.getStudentYear());
+                writer.newLine();
+            }
+            writer.write("FIM_CADEIRA");
+            writer.newLine();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void lerFicheirosCadeira(String file_path)
+    {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file_path)))
+        {
+            String linha;
+            while((linha = reader.readLine()) != null)
+            {
+                String[] dados = linha.split(";");
+                switch(dados[0])
+                {
+                    case "Cadeira":
+                        this.nome = dados[1];
+                        this.year = Integer.parseInt(dados[2]);
+                        break;
+                    case "Professor":
+                        int profNum = Integer.parseInt(dados[1]);
+                        String profNome = dados[2];
+                        String profEmail = dados[3];
+                        String qualificacao = dados[4];
+                        Professor p = new Professor(profNome, profEmail, null, profNum, qualificacao, null, null);
+                        this.professores.put(profNum, p);
+                        break;
+                    case "Aluno":
+                        int alunoNum = Integer.parseInt(dados[1]);
+                        String alunoNome = dados[2];
+                        String alunoEmail = dados[3];
+                        int ano = this.year; // ou Integer.parseInt(dados[4]);
+                        Aluno a = new Aluno(alunoNome, alunoEmail, alunoNum, ano, null);
+                        this.students.put(alunoNum, a);
+                        break;
+                    case "FIM_CADEIRA":
+                        return;
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Inserir aluno na symbol table dos alunos
      * @param aluno aluno a inserir
@@ -136,10 +206,20 @@ public class Cadeira
         aed2.inserirProfessor(celio);
 
         Aluno diogo = new Aluno("Diogo Oliveira", "2023111087@ufp.edu.pt", 2023111087, 2, null);
-        Aluno joao = new Aluno("João Nascimento", "2023111087@ufp.edu.pt", 2023111087, 2, null);
+        Aluno joao = new Aluno("João Nascimento", "2023105291@ufp.edu.pt", 2023105291, 2, null);
 
         lp2.inserirAluno(diogo);
+        lp2.inserirAluno(joao);
+        aed2.inserirAluno(diogo);
         aed2.inserirAluno(joao);
+
+        System.out.println("Escrita de ficheiros");
+        lp2.escreverFicheiroCadeira("teste.txt");
+        Cadeira teste = new Cadeira("", 0, new ST<>(), new ST<>());
+        teste.lerFicheirosCadeira("teste.txt");
+        System.out.println(teste);
+        System.out.println("----------------------------------------------------------------");
+        System.out.println();
 
         System.out.println("Cadeiras antes de remover os dados");
         System.out.println(lp2);

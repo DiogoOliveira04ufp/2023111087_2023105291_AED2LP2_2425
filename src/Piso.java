@@ -1,4 +1,6 @@
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import edu.princeton.cs.algs4.CC;
 import edu.princeton.cs.algs4.Edge;
@@ -18,7 +20,11 @@ public class Piso
     {
         this.nivel = nivel;
         this.pontos = pontos;
-        this.grafoPontos = new EdgeWeightedGraph(pontos.size());
+        int maxId = 0;
+        for (PontoDePassagem p : pontos) {
+            if (p.getId() > maxId) maxId = p.getId();
+        }
+        this.grafoPontos = new EdgeWeightedGraph(maxId + 1);
     }
 
     public void setLevel(int level)
@@ -39,6 +45,115 @@ public class Piso
     public ArrayList<PontoDePassagem> getPoints()
     {
         return this.pontos;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Piso: ").append(nivel).append("\n");
+        sb.append("Pontos de Passagem:\n");
+        for(PontoDePassagem ponto : pontos)
+        {
+            sb.append("  - ").append(ponto.getNamePP()).append("\n");
+        }
+        sb.append("Ligações:\n");
+        HashSet<String> printed = new HashSet<>();
+        for(int v = 0; v < this.grafoPontos.V(); v++)
+        {
+            for(Edge e : this.grafoPontos.adj(v))
+            {
+                int id1 = e.either();
+                int id2 = e.other(id1);
+                String key = Math.min(id1, id2) + "-" + Math.max(id1, id2);
+                if(!printed.contains(key))
+                {
+                    sb.append("  ").append(id1).append(" <-> ").append(id2).append(" (peso: ").append(e.weight()).append(")\n");
+                    printed.add(key);
+                }
+            }
+        }
+        return sb.toString();
+    }
+
+    public void escreverFicheiro(String file_path)
+    {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file_path, false)))
+        {
+            writer.write("Piso;" + this.nivel);
+            writer.newLine();
+            HashSet<String> printed = new HashSet<>();
+            for(PontoDePassagem ponto : pontos)
+            {
+                writer.write("Ponto;" + ponto.getId() + ";" + ponto.getNamePP());
+                writer.newLine();
+            }
+            for(int v = 0; v < this.grafoPontos.V(); v++)
+            {
+                for(Edge e : this.grafoPontos.adj(v))
+                {
+                    int id1 = e.either();
+                    int id2 = e.other(id1);
+                    String key = Math.min(id1, id2) + "-" + Math.max(id1, id2);
+                    if(!printed.contains(key))
+                    {
+                        writer.write("Ligacao;" + id1 + ";" + id2 + ";" + e.weight());
+                        writer.newLine();
+                        printed.add(key);
+                    }
+                }
+            }
+            writer.write("FIM_PISO");
+            writer.newLine();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void lerFicheiro(String file_path)
+    {
+        try(BufferedReader reader = new BufferedReader(new FileReader(file_path)))
+        {
+            String linha;
+            ArrayList<PontoDePassagem> pontosLidos = new ArrayList<>();
+            EdgeWeightedGraph grafo = null;
+            int nivelLido = 0;
+            while((linha = reader.readLine()) != null)
+            {
+                String[] dados = linha.split(";");
+                if(dados[0].equals("Piso"))
+                {
+                    nivelLido = Integer.parseInt(dados[1]);
+                }
+                else if(dados[0].equals("Ponto"))
+                {
+                    int id = Integer.parseInt(dados[1]);
+                    String nome = dados[2];
+                    pontosLidos.add(new PontoDePassagem(id, nome));
+                }
+                else if(dados[0].equals("Ligacao"))
+                {
+                    if(grafo == null)
+                        grafo = new EdgeWeightedGraph(100);         // ou pontosLidos.size()
+                    int id1 = Integer.parseInt(dados[1]);
+                    int id2 = Integer.parseInt(dados[2]);
+                    double peso = Double.parseDouble(dados[3]);
+                    grafo.addEdge(new Edge(id1, id2, peso));
+                }
+                else if(dados[0].equals("FIM_PISO"))
+                {
+                    this.nivel = nivelLido;
+                    this.pontos = pontosLidos;
+                    this.grafoPontos = grafo;
+                }
+            }
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -141,14 +256,30 @@ public class Piso
         piso.conectarPontos(escada, sala3, 1);
         piso.conectarPontos(sala3, sala1, 1);
 
+        System.out.println(piso);
+        System.out.println();
+
+        // -----------------------------------------CAMINHO MAIS CURTO ENTRE SALAS-----------------------------------------
+        System.out.println("-----------------------------------------CAMINHO MAIS CURTO ENTRE SALAS-----------------------------------------");
         ArrayList<PontoDePassagem> caminho = piso.caminhoMaisCurto(sala1, sala3);
 
         System.out.println("Caminho mais curto entre Sala 101 e Sala 103:");
-        for (PontoDePassagem ponto : caminho)
+        for(PontoDePassagem ponto : caminho)
         {
             System.out.println(ponto.getNamePP());
         }
+        System.out.println();
 
+        // -----------------------------------------ESCRITA E LEITURA EM FICHEIROS-----------------------------------------
+        System.out.println("-----------------------------------------ESCRITA E LEITURA EM FICHEIROS-----------------------------------------");
+        piso.escreverFicheiro("teste.txt");
+
+        Piso piso2 = new Piso(0, new ArrayList<>());
+        piso2.lerFicheiro("teste.txt");
+        System.out.println(piso2);
+
+        // -------------------------------------------------PISO É CONEXO--------------------------------------------------
+        System.out.println("-------------------------------------------------PISO É CONEXO--------------------------------------------------");
         System.out.println(piso.pisoEConexo());
 
         piso.grafoPontos = new EdgeWeightedGraph(pontos.size());
@@ -156,5 +287,6 @@ public class Piso
         piso.conectarPontos(escada, sala3, 1);
 
         System.out.println(piso.pisoEConexo());
+        System.out.println();
     }
 }

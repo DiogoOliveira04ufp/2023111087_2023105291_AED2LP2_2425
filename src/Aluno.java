@@ -21,6 +21,11 @@ public class Aluno extends Pessoa
         this.ano = year;
     }
 
+    public int getStudentYear()
+    {
+        return this.ano;
+    }
+
     public int getStudentNumber()
     {
         return this.numero;
@@ -30,43 +35,6 @@ public class Aluno extends Pessoa
     public String toString()
     {
         return "Aluno " + this.getName() + "\nEmail: " + this.getEmail() + "\nNumero: " + this.numero + "\nAno: " + this.ano;
-    }
-
-    @Override
-    public void escreverFicheiro(String file_path)
-    {
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(file_path, true)))
-        {
-            writer.write(this.getName() + ";" + this.getEmail() + ";" + this.numero + ";" + this.ano);
-            writer.newLine();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void lerFicheiro(String file_path)
-    {
-        try(BufferedReader reader = new BufferedReader(new FileReader(file_path)))
-        {
-            String linha;
-            while((linha = reader.readLine()) != null)
-            {
-                String[] dados = linha.split(";");
-                String nome = dados[0];
-                String email = dados[1];
-                int numero = Integer.parseInt(dados[2]);
-                int ano = Integer.parseInt(dados[3]);
-                // Criar um novo objeto Aluno ou atualizar os dados
-                System.out.println("Aluno lido: " + nome + ", " + email + ", " + numero + ", " + ano);
-            }
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -123,17 +91,11 @@ public class Aluno extends Pessoa
         Aluno jose = new Aluno("José", "jose@ufp.pt", 31, 2, new Horario());
         Professor antonio = new Professor("António", "antonio@ufp.pt", new Horario(), 3, "mestrado", duas, quatro);
 
-        armindo.getTimetable().adicionarAula(new Aula(meio_dia, uma, new Data((short)31, (short)5, 2025), null, null));
-        jose.getTimetable().adicionarAula(new Aula(duas, quatro, new Data((short)31, (short)5, 2025), null, null));
+        armindo.getTimetable().adicionarAula(new Aula(meio_dia, uma, new Data((short) 31, (short) 5, 2025), null, null));
+        jose.getTimetable().adicionarAula(new Aula(duas, quatro, new Data((short) 31, (short) 5, 2025), null, null));
 
         System.out.println("Horários para Armindo (pode): " + armindo.horarioParaReuniao(antonio));
         System.out.println("Horários para José (não pode): " + jose.horarioParaReuniao(antonio));
         System.out.println();
-
-        armindo.escreverFicheiro("teste.txt");
-        jose.escreverFicheiro("teste.txt");
-
-        Aluno teste = new Aluno("", "", 0, 0, null);
-        teste.lerFicheiro("teste.txt");
     }
 }
