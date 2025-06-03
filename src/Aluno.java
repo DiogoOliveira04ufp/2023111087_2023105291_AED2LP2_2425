@@ -92,6 +92,7 @@ public class Aluno extends Pessoa
         Professor antonio = new Professor("António", "antonio@ufp.pt", new Horario(), 3, "mestrado", duas, quatro);
 
         armindo.getTimetable().adicionarAula(new Aula(meio_dia, uma, new Data((short) 31, (short) 5, 2025), null, null));
+        armindo.getTimetable().adicionarAula(new Aula(tres, quatro, new Data((short)31, (short)5, 2025), null, null));
         jose.getTimetable().adicionarAula(new Aula(duas, quatro, new Data((short) 31, (short) 5, 2025), null, null));
 
         System.out.println("Horários para Armindo (pode): " + armindo.horarioParaReuniao(antonio));

@@ -21,7 +21,8 @@ public class Piso
         this.nivel = nivel;
         this.pontos = pontos;
         int maxId = 0;
-        for (PontoDePassagem p : pontos) {
+        for(PontoDePassagem p : pontos)
+        {
             if (p.getId() > maxId) maxId = p.getId();
         }
         this.grafoPontos = new EdgeWeightedGraph(maxId + 1);

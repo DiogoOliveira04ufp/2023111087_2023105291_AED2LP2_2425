@@ -135,7 +135,7 @@ public class Cadeira
                         int alunoNum = Integer.parseInt(dados[1]);
                         String alunoNome = dados[2];
                         String alunoEmail = dados[3];
-                        int ano = this.year; // ou Integer.parseInt(dados[4]);
+                        int ano = this.year;
                         Aluno a = new Aluno(alunoNome, alunoEmail, alunoNum, ano, null);
                         this.students.put(alunoNum, a);
                         break;

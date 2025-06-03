@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import edu.princeton.cs.algs4.ST;
 
@@ -62,6 +63,7 @@ public class Professor extends Pessoa
      * Receber a lista de salas livres num determinado horário
      * @param horaInicio hora onde o horário a pesquisar começa
      * @param horaFim hora onde o horário a pesquisar acaba
+     * @param pisos pisos do edifício a verificar
      * @return ArrayList das salas disponíveis
      */
     public ArrayList<Sala> verSalasHorario(Hora horaInicio, Hora horaFim, ArrayList<Piso> pisos)
@@ -76,13 +78,13 @@ public class Professor extends Pessoa
                 {
                     Sala sala = (Sala) ponto;
                     boolean salaLivre = true;
-                    System.out.println("Verificando sala: " + sala.getNamePP());
+                    // System.out.println("Verificando sala: " + sala.getNamePP());
 
                     for(Aula aula : sala.getTimetable().getAllLectures())
                     {
-                        System.out.println("Aula: " + aula.getStartTime() + " - " + aula.getEndTime());
-                        System.out.println("Intervalo: " + horaInicio + " - " + horaFim);
-                        System.out.println("Sobreposição: " + !(aula.getEndTime().isBefore(horaInicio) || aula.getStartTime().isAfter(horaFim)) + "\n\n");
+                        // System.out.println("Aula: " + aula.getStartTime() + " - " + aula.getEndTime());
+                        // System.out.println("Intervalo: " + horaInicio + " - " + horaFim);
+                        // System.out.println("Sobreposição: " + !(aula.getEndTime().isBefore(horaInicio) || aula.getStartTime().isAfter(horaFim)) + "\n\n");
                         if(!(aula.getEndTime().isBefore(horaInicio) || aula.getStartTime().isAfter(horaFim)))
                         {
                             salaLivre = false;
@@ -109,6 +111,7 @@ public class Professor extends Pessoa
     public ArrayList<Aluno> verAlunosProfessor(ArrayList<Curso> cursos)
     {
         ArrayList<Aluno> alunos = new ArrayList<>();
+        HashSet<Integer> numerosAdicionados = new HashSet<>();
 
         for(Curso curso : cursos)
         {
@@ -118,7 +121,11 @@ public class Professor extends Pessoa
                 {
                     for(Integer key : cadeira.getClassStudents().keys())
                     {
-                        alunos.add(cadeira.getClassStudents().get(key));
+                        if(!numerosAdicionados.contains(key))
+                        {
+                            alunos.add(cadeira.getClassStudents().get(key));
+                            numerosAdicionados.add(key);
+                        }
                     }
                 }
             }
@@ -199,7 +206,7 @@ public class Professor extends Pessoa
         Horario horarioSala1 = new Horario();
         Horario horarioSala2 = new Horario();
 
-        Aula aula1 = new Aula(new Hora(14, 0), new Hora(15, 0), new Data((short)30, (short)5, 2025), null, null);
+        Aula aula1 = new Aula(new Hora(14, 0), new Hora(14, 55), new Data((short)30, (short)5, 2025), null, null);
         Aula aula2 = new Aula(new Hora(16, 0), new Hora(17, 0), new Data((short)30, (short)5, 2025), null, null);
         Aula aula3 = new Aula(new Hora(15, 15), new Hora(15, 45), null, null, cadeira1);
 
